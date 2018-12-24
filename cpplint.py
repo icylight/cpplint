@@ -6190,6 +6190,9 @@ def ProcessConfigOverrides(filename):
           elif name == 'root':
             global _root
             _root = val
+          elif name == 'repository':
+            global _repository
+            _repository = val
           else:
             _cpplint_state.PrintError(
                 'Invalid configuration option (%s) in file %s\n' %
