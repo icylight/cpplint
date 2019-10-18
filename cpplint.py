@@ -3360,7 +3360,8 @@ def CheckComment(line, filename, linenum, next_line_start, error):
           ((commentpos >= 1 and
             line[commentpos-1] not in string.whitespace) or
            (commentpos >= 2 and
-            line[commentpos-2] not in string.whitespace))):
+            line[commentpos-2] not in string.whitespace)) and
+          linenum != 1):
         error(filename, linenum, 'whitespace/comments', 2,
               'At least two spaces is best between code and comments')
 
@@ -6281,6 +6282,10 @@ def ProcessConfigOverrides(filename):
             global _root
             # root directories are specified relative to CPPLINT.cfg dir.
             _root = os.path.join(os.path.dirname(cfg_file), val)
+          elif name == 'repository':
+            global _repository
+            # repository directories are specified relative to CPPLINT.cfg dir.
+            _repository = os.path.join(os.path.dirname(cfg_file), val)
           elif name == 'headers':
             ProcessHppHeadersOption(val)
           else:
